@@ -9,10 +9,10 @@ import base.BasePage;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(name = "username")
+    @FindBy(xpath = "//input[@name='username']")
     private WebElement username;
 
-    @FindBy(name = "password")
+    @FindBy(xpath = "//input[@type='password']")
     private WebElement password;
 
     @FindBy(xpath = "//button[@type='submit']")

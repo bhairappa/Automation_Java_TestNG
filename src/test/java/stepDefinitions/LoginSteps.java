@@ -29,8 +29,9 @@ public class LoginSteps {
     }
 
     @When("user enters valid username and password")
-    public void user_enters_valid_credentials() {
+    public void user_enters_valid_credentials() throws Exception {
 
+    	Thread.sleep(2000);
         loginPage.enterUsername(
                 Configreader.getProperty("username"));
 
