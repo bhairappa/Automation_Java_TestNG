@@ -7,17 +7,18 @@ import org.openqa.selenium.support.PageFactory;
 
 import base.BasePage;
 
-public class DashboardPage extends BasePage {
+public class DashboardSteps extends BasePage {
 
-    @FindBy(xpath = "//h6[text()='Dashboard']")
-    private WebElement dashboardHeader;
 
-    public DashboardPage(WebDriver driver) {
+//    @FindBy(xpath = "//h6[text()='Dashboard']")
+//    private WebElement dashboardHeader;
+//
+    public DashboardSteps(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-
-    public boolean isDashboardDisplayed() {
-        return dashboardHeader.isDisplayed();
-    }
+//
+//    public boolean isDashboardDisplayed() {
+//        return dashboardHeader.isDisplayed();
+//    }
 }
