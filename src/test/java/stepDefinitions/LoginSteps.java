@@ -5,7 +5,6 @@ import org.testng.Assert;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
-
 import pages.LoginPage;
 import pages.LoginPage;
 import pages.DashboardPage;
@@ -31,7 +30,7 @@ public class LoginSteps {
     @When("user enters valid username and password")
     public void user_enters_valid_credentials() throws Exception {
 
-    	Thread.sleep(2000);
+//    	Thread.sleep(2000);
         loginPage.enterUsername(
                 Configreader.getProperty("username"));
 
@@ -40,8 +39,8 @@ public class LoginSteps {
     }
 
     @When("user clicks on login button")
-    public void user_clicks_login_button() {
-
+    public void user_clicks_login_button() throws Exception {
+//    	Thread.sleep(2000);
         loginPage.clickLogin();
     }
 
