@@ -55,4 +55,39 @@ public class LoginSteps {
                 "Dashboard is not displayed after login"
         );
     }
+    
+//    -----------------------------------------
+    @Given("user is on the OrangeHRM login page")
+    public void user_is_on_login_page1() {
+
+        DriverFactory.getDriver()
+                .get(Configreader.getProperty("url"));
+
+        loginPage =
+                new LoginPage(DriverFactory.getDriver());
+    }
+
+    @When("user enters valid username and password")
+    public void user_enters_invalid_credentials() throws Exception {
+
+//    	Thread.sleep(2000);
+        loginPage.enterUsername(
+                Configreader.getProperty("invalidusername"));
+
+        loginPage.enterPassword(
+                Configreader.getProperty("invalidpassword"));
+    }
+
+    @When("user clicks on login button")
+    public void user_clicks_login_button1() throws Exception {
+//    	Thread.sleep(2000);
+        loginPage.clickLogin();
+    }
+
+    @Then("OrangeHRM dashboard should be displayed")
+    public void show_error_message() {
+    	
+    	
+    	
+    }
 }
