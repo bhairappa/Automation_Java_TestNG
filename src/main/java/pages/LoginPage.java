@@ -18,7 +18,11 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement loginButton;
-
+    
+    @FindBy(xpath = "//p[text()='Invalid credentials']")
+    private WebElement errormsg;
+    
+ 
     public LoginPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
