@@ -86,6 +86,10 @@ public class LoginSteps {
 
     @Then("OrangeHRM dashboard should be displayed")
     public void show_error_message() {
+    	Assert.assertTrue(
+    	        loginPage.isErrorMessageDisplayed(),
+    	        "Invalid credentials error message is not displayed"
+    	    );
     	
     	
     	
