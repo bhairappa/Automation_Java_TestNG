@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,9 +20,15 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement loginButton;
     
-    @FindBy(xpath = "//p[text()='Invalid credentials']")
-    private WebElement errormsg;
+//    @FindBy(xpath = "//p[text()='Invalid credentials']")
+//    private WebElement errormsg;
     
+    private By errorMessage =
+            By.xpath("//p[text()='Invalid credentials']");
+
+    public boolean isErrorMessageDisplayed() {
+        return isDisplayed(errorMessage);
+    }
  
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -47,4 +54,19 @@ public class LoginPage extends BasePage {
         enterPassword(passwordValue);
         clickLogin();
     }
+
+//	public boolean isErrorMessageDisplayed() {
+//		// TODO Auto-generated method stub
+//		 try {
+//		        WebDriverWait wait =
+//		            new WebDriverWait(driver, Duration.ofSeconds(5));
+//
+//		        return wait.until(
+//		            ExpectedConditions.visibilityOf(errormsg)
+//		        ).isDisplayed();
+//
+//		    } catch (TimeoutException e) {
+//		        return false;
+//		    }
+//	}
 }
