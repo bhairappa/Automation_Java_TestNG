@@ -38,13 +38,24 @@ public class LoginSteps {
                 Configreader.getProperty("password"));
     }
 
+    @When("user enters invalid username and password")
+    public void user_enters_invalid_credentials() throws Exception {
+
+//    	Thread.sleep(2000);
+        loginPage.enterUsername(
+                Configreader.getProperty("invalidusername"));
+
+        loginPage.enterPassword(
+                Configreader.getProperty("invalidpassword"));
+    }
+    
     @When("user clicks on login button")
     public void user_clicks_login_button() throws Exception {
 //    	Thread.sleep(2000);
         loginPage.clickLogin();
     }
 
-    @Then("OrangeHRM dashboard should be displayed")
+    @Then("OrangeHRM Dashboard should be displayed")
     public void dashboard_should_be_displayed() {
 
         dashboardPage =
@@ -56,42 +67,11 @@ public class LoginSteps {
         );
     }
     
-//    -----------------------------------------
-    @Given("user is on the OrangeHRM login page")
-    public void user_is_on_login_page1() {
-
-        DriverFactory.getDriver()
-                .get(Configreader.getProperty("url"));
-
-        loginPage =
-                new LoginPage(DriverFactory.getDriver());
-    }
-
-    @When("user enters valid username and password")
-    public void user_enters_invalid_credentials() throws Exception {
-
-//    	Thread.sleep(2000);
-        loginPage.enterUsername(
-                Configreader.getProperty("invalidusername"));
-
-        loginPage.enterPassword(
-                Configreader.getProperty("invalidpassword"));
-    }
-
-    @When("user clicks on login button")
-    public void user_clicks_login_button1() throws Exception {
-//    	Thread.sleep(2000);
-        loginPage.clickLogin();
-    }
-
-    @Then("OrangeHRM dashboard should be displayed")
+    @Then("user should see error msg")
     public void show_error_message() {
     	Assert.assertTrue(
     	        loginPage.isErrorMessageDisplayed(),
     	        "Invalid credentials error message is not displayed"
-    	    );
-    	
-    	
-    	
+    	    );   	
     }
 }

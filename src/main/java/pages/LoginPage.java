@@ -23,6 +23,12 @@ public class LoginPage extends BasePage {
 //    @FindBy(xpath = "//p[text()='Invalid credentials']")
 //    private WebElement errormsg;
     
+    private By emptypassworderrorMessage =
+            By.xpath("//input[@name='password']/following::span[text()='Required']");
+    
+    private By emptyusererrorMessage =
+            By.xpath("//input[@name='username']/following::span[text()='Required'][1]");
+    
     private By errorMessage =
             By.xpath("//p[text()='Invalid credentials']");
 
