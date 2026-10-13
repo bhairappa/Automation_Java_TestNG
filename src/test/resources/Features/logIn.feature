@@ -14,12 +14,12 @@ Feature: OrangeHRM Login
     And user clicks on login button
     Then user should see error msg
     
-  Scenario: login with invalid credentials
+  Scenario: login with empty credentials
         
     Given user is on the OrangeHRM login page
     When user keeps the username and password fields empty
     And user clicks on login button
-    Then user should see error msg
+    Then user should see error msg as required
     
     
      

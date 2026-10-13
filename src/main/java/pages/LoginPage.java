@@ -17,8 +17,10 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//input[@type='password']")
     private WebElement password;
 
-    @FindBy(xpath = "//button[@type='submit']")
-    private WebElement loginButton;
+//    @FindBy(xpath = "//button[@type='submit']")
+//    private WebElement loginButton;
+    
+    private By loginButton =  By.xpath("//button[@type='submit']");
     
 //    @FindBy(xpath = "//p[text()='Invalid credentials']")
 //    private WebElement errormsg;
@@ -29,11 +31,18 @@ public class LoginPage extends BasePage {
     private By emptyusererrorMessage =
             By.xpath("//input[@name='username']/following::span[text()='Required'][1]");
     
-    private By errorMessage =
-            By.xpath("//p[text()='Invalid credentials']");
+    private By errorMessage =  By.xpath("//p[text()='Invalid credentials']");
 
     public boolean isErrorMessageDisplayed() {
         return isDisplayed(errorMessage);
+    }
+    
+    public boolean isEmptyUserErrorMessageDisplayed() {
+        return isDisplayed(emptyusererrorMessage);
+    }
+    
+    public boolean isEmptypasswordErrorMessageDisplayed() {
+        return isDisplayed(emptypassworderrorMessage);
     }
  
     public LoginPage(WebDriver driver) {
@@ -52,7 +61,7 @@ public class LoginPage extends BasePage {
     }
 
     public void clickLogin() {
-        loginButton.click();
+        click(loginButton);
     }
 
     public void login(String usernameValue, String passwordValue) {
