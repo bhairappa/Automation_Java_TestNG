@@ -49,12 +49,16 @@ public class LoginSteps {
                 Configreader.getProperty("invalidpassword"));
     }
     
+    @When("user keeps the username and password fields empty")
+    public void user_enters_empty_credentials() throws Exception {
+        //when user keeps empty fields
+    }
+    
     @When("user clicks on login button")
     public void user_clicks_login_button() throws Exception {
-//    	Thread.sleep(2000);
         loginPage.clickLogin();
     }
-
+   
     @Then("OrangeHRM Dashboard should be displayed")
     public void dashboard_should_be_displayed() {
 
@@ -73,5 +77,19 @@ public class LoginSteps {
     	        loginPage.isErrorMessageDisplayed(),
     	        "Invalid credentials error message is not displayed"
     	    );   	
+    }
+    
+    @Then("user should see error msg as required")
+    public void show_error_message_as_requored() {
+    	Assert.assertTrue(
+    	        loginPage.isEmptyUserErrorMessageDisplayed(),
+    	        "Username required message is not displayed"
+    	    );
+    	Assert.assertTrue(
+    	        loginPage.isEmptypasswordErrorMessageDisplayed(),
+    	        "Password required message is not displayed"
+    	    );  
+    	
+     	
     }
 }
