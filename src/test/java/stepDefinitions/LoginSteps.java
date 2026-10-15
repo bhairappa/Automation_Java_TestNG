@@ -91,8 +91,42 @@ public class LoginSteps {
     	    );  
     	   	
     }
-    
-    public void varifyLogout() {
-    	loginPage.logout();
+    @Given("user is on login page")
+    public void user_is_logged_in_to_orangehrm() throws Exception {
+
+        DriverFactory.getDriver().get(
+            Configreader.getProperty("url")
+        );
+
+        loginPage = new LoginPage(DriverFactory.getDriver());
+
+        loginPage.enterUsername(
+            Configreader.getProperty("username")
+        );
+
+        loginPage.enterPassword(
+            Configreader.getProperty("password")
+        );
+
+        loginPage.clickLogin();
     }
+
+    @When("user clicks on logout dropdown")
+    public void user_clicks_on_logout_dropdown() {
+        loginPage.clickLogoutDropdown();
+    }
+
+    @When("user clicks on logout option")
+    public void user_clicks_on_logout_option() {
+        loginPage.clickLogoutOption();
+    }
+
+    @Then("user should see login message")
+    public void user_should_see_login_page() {
+        Assert.assertTrue(
+            loginPage.isLoginHeaderDisplayed(),
+            "Login page is not displayed after logout"
+        );
+    }
+    
 }
