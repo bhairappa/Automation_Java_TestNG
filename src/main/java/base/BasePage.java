@@ -1,6 +1,7 @@
 package base;
 
 import java.time.Duration;
+import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +21,15 @@ public class BasePage {
     protected void click(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator))
             .click();
+    }
+    protected void click(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element))
+            .click();
+    }
+
+    protected boolean isDisplayed(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element))
+                   .isDisplayed();
     }
 
     protected void enterText(By locator, String text) {

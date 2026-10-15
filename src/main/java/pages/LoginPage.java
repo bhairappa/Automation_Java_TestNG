@@ -81,10 +81,16 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//h5[text()='Login']")
     private WebElement loginHeader;
     
-    public void logout() {
-    	logoutDropDown.click();
-    	logoutOption.click();
-    	
+    public void clickLogoutDropdown() {
+        click(logoutDropDown);
+    }
+
+    public void clickLogoutOption() {
+        click(logoutOption);
+    }
+
+    public boolean isLoginHeaderDisplayed() {
+        return isDisplayed(loginHeader);
     }
     
 //	public boolean isErrorMessageDisplayed() {
