@@ -89,7 +89,10 @@ public class LoginSteps {
     	        loginPage.isEmptypasswordErrorMessageDisplayed(),
     	        "Password required message is not displayed"
     	    );  
-    	
-     	
+    	   	
+    }
+    
+    public void varifyLogout() {
+    	loginPage.logout();
     }
 }

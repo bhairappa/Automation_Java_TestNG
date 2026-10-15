@@ -21,6 +21,7 @@ public class LoginPage extends BasePage {
 //    private WebElement loginButton;
     
     private By loginButton =  By.xpath("//button[@type='submit']");
+  
     
 //    @FindBy(xpath = "//p[text()='Invalid credentials']")
 //    private WebElement errormsg;
@@ -70,6 +71,22 @@ public class LoginPage extends BasePage {
         clickLogin();
     }
 
+ 
+    @FindBy(xpath =  "//i[@class='oxd-icon bi-caret-down-fill oxd-userdropdown-icon']")
+    private WebElement logoutDropDown;
+    
+    @FindBy(xpath =  "//a[text()='Logout']")
+    private WebElement logoutOption;
+    
+    @FindBy(xpath = "//h5[text()='Login']")
+    private WebElement loginHeader;
+    
+    public void logout() {
+    	logoutDropDown.click();
+    	logoutOption.click();
+    	
+    }
+    
 //	public boolean isErrorMessageDisplayed() {
 //		// TODO Auto-generated method stub
 //		 try {
