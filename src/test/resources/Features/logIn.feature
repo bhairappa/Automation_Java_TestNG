@@ -21,7 +21,7 @@ Feature: OrangeHRM Login
     Then user should see error msg as required
 
   Scenario: Click on logout and verify login page
-    Given user is on login page
+    Given user is logged in to OrangeHRM
     When user clicks on logout dropdown
     And user clicks on logout option
     Then user should see login message
