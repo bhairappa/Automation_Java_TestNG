@@ -6,9 +6,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import pages.LoginPage;
-import pages.LoginPage;
 import pages.DashboardPage;
-import pages.LoginPage;
 import utilities.Configreader;
 import utilities.DriverFactory;
 
@@ -91,7 +89,7 @@ public class LoginSteps {
     	    );  
     	   	
     }
-    @Given("user is on login page")
+    @Given("user is logged in to OrangeHRM")
     public void user_is_logged_in_to_orangehrm() throws Exception {
 
         DriverFactory.getDriver().get(
@@ -112,6 +110,7 @@ public class LoginSteps {
     }
 
     @When("user clicks on logout dropdown")
+    
     public void user_clicks_on_logout_dropdown() {
         loginPage.clickLogoutDropdown();
     }
