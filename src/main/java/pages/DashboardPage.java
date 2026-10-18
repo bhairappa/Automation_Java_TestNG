@@ -36,9 +36,17 @@ public class DashboardPage extends BasePage {
 	@FindBy(xpath="//p[text()='Employee Distribution by Sub Unit']")
 	private WebElement dashboardWidgetEmployeeDistributionbyLocation;
 
+	@FindBy(xpath="//button[@title='Assign Leave']")
+	private WebElement  QuickLauchclick;
+	
+	
     public DashboardPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+    }
+    
+    public void QuickLauchClick() {
+    	QuickLauchclick.click();
     }
 
     public boolean isDashboardDisplayed() {
