@@ -36,11 +36,43 @@ public class DashboardPage extends BasePage {
 	@FindBy(xpath="//p[text()='Employee Distribution by Sub Unit']")
 	private WebElement dashboardWidgetEmployeeDistributionbyLocation;
 
+	@FindBy(xpath="//button[@title='Assign Leave']")
+	private WebElement  assignLeaveButton;
+	
+	@FindBy(xpath="//h6[text()='Assign Leave']")
+	private WebElement  assignLeave_Name;
+	
+	@FindBy(xpath="//label[text()='Employee Name']")
+	private WebElement  assignLeave_employeeName;
+	
+	@FindBy(xpath="//label[text()='Leave Type']")
+	private WebElement  assignLeave_LeaveType;
+	
+	@FindBy(xpath="//label[text()='Leave Balance']")
+	private WebElement  assignLeave_LeaveBalance;
+	
+	@FindBy(xpath="//label[text()='From Date']")
+	private WebElement  assignLeave_FromDate;
+	
+	@FindBy(xpath="//label[text()='To Date']")
+	private WebElement  assignLeave_ToDate;
+	
+	@FindBy(xpath="//label[text()='Comments']")
+	private WebElement  assignLeave_Comments;
+	
+	@FindBy(xpath="//p[text()=' * Required']")
+	private WebElement  assignLeave_Required;
+	
+	
     public DashboardPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-
+    
+//    public void QuickLauchClick() {
+//    	QuickLauchclick_AssignLeave.click();
+//    }
+//    
     public boolean isDashboardDisplayed() {
     	 wait.until(ExpectedConditions.visibilityOf(dashboardHeader));
         return dashboardHeader.isDisplayed();
@@ -58,5 +90,21 @@ public class DashboardPage extends BasePage {
     		   &&dashboardWidgetEmployeeDistributionbySubUnit.isDisplayed()
     		   &&dashboardWidgetEmployeeDistributionbyLocation.isDisplayed();
    }
+    public void clickAssignLeave() {
+    	click(assignLeaveButton);
+    }
+    public boolean isAssignLeaveWidgetsDisplayed() {
+      	 wait.until(ExpectedConditions.visibilityOf(assignLeave_Name));
+      	System.out.println(assignLeave_Name.getText());
+          return assignLeave_Name.isDisplayed()
+       		   &&assignLeave_employeeName.isDisplayed()
+       		   &&assignLeave_LeaveType.isDisplayed()
+       		   &&assignLeave_LeaveBalance.isDisplayed()
+       		   &&assignLeave_FromDate.isDisplayed()
+       		   &&assignLeave_ToDate.isDisplayed()
+       		   &&assignLeave_Comments.isDisplayed()
+       		   &&assignLeave_Required.isDisplayed();
+      }
+   
     
 }

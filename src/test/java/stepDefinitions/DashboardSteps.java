@@ -52,5 +52,16 @@ private DashboardPage dashboardPage;
     	            "Dashboard Widgets are not displayed after dashboard visibility"
     	    );
     }
+    @Then("actual names should match the expected names in assign leave")
+    public void assignLeaveUiCheck() {
+    	dashboardPage.clickAssignLeave();
+    String assignLeaveUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/leave/assignLeave"; 
+    Assert.assertEquals(dashboardPage.getActualurl(),assignLeaveUrl,"actualurl does not matches the expected url");
+    Assert.assertTrue(
+            dashboardPage.isAssignLeaveWidgetsDisplayed(),
+            "Assign Leave Widgets are not displayed after dashboard visibility"
+    );
+   
+    }
 
 }
