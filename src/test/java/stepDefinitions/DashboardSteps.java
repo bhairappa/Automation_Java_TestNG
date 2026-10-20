@@ -13,6 +13,7 @@ import org.testng.Assert;
 
 import base.BasePage;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 public class DashboardSteps{
 
@@ -63,5 +64,20 @@ private DashboardPage dashboardPage;
     );
    
     }
-
+    @When("user enters vi")
+    public void enterEmployeename() {
+    	dashboardPage.enterEmployeename();
+    }
+    @Then("employee suggestions should be displayed")
+    public void EmployeenameSuggestions() {
+    	dashboardPage.isEmployeeDropdownDisplayed();
+    }
+    @When("user selects Ravi M B")
+    public void EmployeenameSelectioin() {
+    	dashboardPage.EmployeenameSuggestions();
+    }
+    @Then("selected employee should be displayed")
+    public void DisplyedselectedEmployeeCheck() {
+    	dashboardPage.isSelectedEmployeeNameDisplyed();
+    }
 }

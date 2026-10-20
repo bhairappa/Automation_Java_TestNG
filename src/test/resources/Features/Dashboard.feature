@@ -6,3 +6,12 @@ Feature: Dashboard content visible
     Then actual url should match the expected url
     Then dashboard widgets are displayed
     Then actual names should match the expected names in assign leave
+    
+  Scenario: Verify valid employee selection
+     Given user is logged in to OrangeHRM
+     When user enters vi
+     Then employee suggestions should be displayed
+     When user selects "Ravi M B"
+     Then selected employee should be displayed
+     
+     

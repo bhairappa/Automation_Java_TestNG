@@ -1,5 +1,8 @@
 package pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -63,6 +66,14 @@ public class DashboardPage extends BasePage {
 	@FindBy(xpath="//p[text()=' * Required']")
 	private WebElement  assignLeave_Required;
 	
+	@FindBy(xpath="//div[@class='oxd-autocomplete-text-input oxd-autocomplete-text-input--active']")
+	private WebElement VarifyEmployeeName;
+	
+	@FindBy(xpath="//div[@class='oxd-autocomplete-dropdown --positon-bottom']")
+	private WebElement EmployeeNameDropDown;
+	
+	@FindBy(xpath="//input[@placeholder='Type for hints...']")
+	private WebElement AfterselectingName;
 	
     public DashboardPage(WebDriver driver) {
         super(driver);
@@ -106,5 +117,23 @@ public class DashboardPage extends BasePage {
        		   &&assignLeave_Required.isDisplayed();
       }
    
-    
+    public void enterEmployeename() {
+    	enterTextElement(VarifyEmployeeName, "vi");
+    }
+    public boolean isEmployeeDropdownDisplayed() {
+		return isDisplayed(EmployeeNameDropDown);
+    	
+    }
+    public boolean isSelectedEmployeeNameDisplyed() {
+    	return isDisplayed(AfterselectingName);
+    }
+    public void EmployeenameSuggestions() {
+    	List<WebElement> employeeNameList =new ArrayList<>();
+    	for(WebElement employeeNames:employeeNameList) {
+    		if(employeeNames.getText().equals("Ravi M B")) {
+    			break;
+    		}
+    	}
+    	
+    }
 }
