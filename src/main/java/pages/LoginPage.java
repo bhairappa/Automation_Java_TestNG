@@ -93,6 +93,7 @@ public class LoginPage extends BasePage {
         return isDisplayed(loginHeader);
     }
     
+   
 //	public boolean isErrorMessageDisplayed() {
 //		// TODO Auto-generated method stub
 //		 try {
