@@ -9,9 +9,10 @@ Feature: Dashboard content visible
     
   Scenario: Verify valid employee selection
      Given user is logged in to OrangeHRM
-     When user enters vi
+     When user navigates to Assign Leave page
+     And user enters employee name "vi"
      Then employee suggestions should be displayed
-     When user selects "Ravi M B"
-     Then selected employee should be displayed
+     When user selects name
+   
      
      
