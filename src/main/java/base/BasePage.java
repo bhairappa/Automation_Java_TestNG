@@ -1,6 +1,9 @@
 package base;
 
+//import java.awt.List;
 import java.time.Duration;
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.By;
@@ -46,5 +49,10 @@ public class BasePage {
         return wait.until(
                 ExpectedConditions.visibilityOfElementLocated(locator)
         ).isDisplayed();
+    }
+    protected List<WebElement> getVisibleElements(By locator) {
+        return wait.until(
+            ExpectedConditions.visibilityOfAllElementsLocatedBy(locator)
+        );
     }
 }

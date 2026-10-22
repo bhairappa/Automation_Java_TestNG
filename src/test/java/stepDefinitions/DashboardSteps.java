@@ -30,6 +30,9 @@ public class DashboardSteps{
 	
 private DashboardPage dashboardPage;
 
+public DashboardSteps() {
+    dashboardPage = new DashboardPage(DriverFactory.getDriver());
+}
     @Then("Dashboard heading should be displayed")
     public void isDashboardDisplayed() {
         dashboardPage = new DashboardPage(
@@ -64,20 +67,36 @@ private DashboardPage dashboardPage;
     );
    
     }
-    @When("user enters vi")
-    public void enterEmployeename() {
-    	dashboardPage.enterEmployeename();
+    @When ("user navigates to Assign Leave page")
+    public void assignLeavePage() {
+    	dashboardPage.clickAssignLeave();
     }
+    @When("user enters employee name {string}")
+    public void enterEmployeename(String name) {
+    	dashboardPage.enterEmployeename(name);;
+    }
+    
     @Then("employee suggestions should be displayed")
     public void EmployeenameSuggestions() {
-    	dashboardPage.isEmployeeDropdownDisplayed();
+        Assert.assertTrue(
+                dashboardPage.isEmployeeDropdownDisplayed(),
+                "Employee suggestions are not displayed"
+            );
+
     }
-    @When("user selects Ravi M B")
-    public void EmployeenameSelectioin() {
-    	dashboardPage.EmployeenameSuggestions();
+    
+    @When("user selects name")
+    public void selectEmployeeName() {  //String expectedName
+    	dashboardPage.selectEmployeeName();;
     }
-    @Then("selected employee should be displayed")
-    public void DisplyedselectedEmployeeCheck() {
-    	dashboardPage.isSelectedEmployeeNameDisplyed();
-    }
+    
+ // Then selected employee name should be "Ravi M B"
+//    @Then("selected employee name should be {string}")
+//    public void getSelectedEmployeeName(String expectedName) {
+//    	Assert.assertEquals(
+//    	        dashboardPage.getSelectedEmployeeName(),
+//    	        expectedName,
+//    	        "Selected employee name does not match"
+//    	    );
+//    }  // 
 }

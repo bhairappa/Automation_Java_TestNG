@@ -3,6 +3,7 @@ package pages;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -66,11 +67,18 @@ public class DashboardPage extends BasePage {
 	@FindBy(xpath="//p[text()=' * Required']")
 	private WebElement  assignLeave_Required;
 	
-	@FindBy(xpath="//div[@class='oxd-autocomplete-text-input oxd-autocomplete-text-input--active']")
+//	@FindBy(xpath="//div[@class='oxd-autocomplete-text-input oxd-autocomplete-text-input--active']")
+//	private WebElement VarifyEmployeeName;
+	
+	@FindBy(xpath = "//input[@placeholder='Type for hints...']")
 	private WebElement VarifyEmployeeName;
 	
-	@FindBy(xpath="//div[@class='oxd-autocomplete-dropdown --positon-bottom']")
-	private WebElement EmployeeNameDropDown;
+//	@FindBy(xpath="//div[@class='oxd-autocomplete-dropdown --positon-bottom']")
+	
+//	private By employeeSuggestions =  By.xpath("//div[@class='oxd-autocomplete-dropdown --positon-bottom']");
+	
+	private By employeeSuggestions =
+	        By.xpath("//div[contains(@class,'oxd-autocomplete-option')]");
 	
 	@FindBy(xpath="//input[@placeholder='Type for hints...']")
 	private WebElement AfterselectingName;
@@ -117,23 +125,31 @@ public class DashboardPage extends BasePage {
        		   &&assignLeave_Required.isDisplayed();
       }
    
-    public void enterEmployeename() {
-    	enterTextElement(VarifyEmployeeName, "vi");
+    public void enterEmployeename(String name) {
+    	enterTextElement(VarifyEmployeeName, name);
     }
+    
     public boolean isEmployeeDropdownDisplayed() {
-		return isDisplayed(EmployeeNameDropDown);
+		return isDisplayed(employeeSuggestions);
     	
     }
-    public boolean isSelectedEmployeeNameDisplyed() {
-    	return isDisplayed(AfterselectingName);
-    }
-    public void EmployeenameSuggestions() {
-    	List<WebElement> employeeNameList =new ArrayList<>();
-    	for(WebElement employeeNames:employeeNameList) {
-    		if(employeeNames.getText().equals("Ravi M B")) {
-    			break;
-    		}
-    	}
-    	
+    
+//    public String  getSelectedEmployeeName() {
+//    	return AfterselectingName.getAttribute("value");
+//    }
+    public void selectEmployeeName() {
+//    	String expectedName
+        List<WebElement> suggestions =
+                getVisibleElements(employeeSuggestions);
+
+        for (WebElement suggestion : suggestions) {
+        	System.out.println("Suggestion: " + suggestion.getText());
+//            if (suggestion.getText().trim().equals(expectedName)) {
+//                click(suggestion);
+//                return;
+//            }
+        }
+
+//        throw new AssertionError("Employee not found: " + expectedName);
     }
 }
