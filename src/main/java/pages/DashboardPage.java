@@ -78,7 +78,7 @@ public class DashboardPage extends BasePage {
 //	private By employeeSuggestions =  By.xpath("//div[@class='oxd-autocomplete-dropdown --positon-bottom']");
 	
 	private By employeeSuggestions =
-	        By.xpath("//div[contains(@class,'oxd-autocomplete-option')]");
+	        By.xpath("//div[@role='listbox']//div[@role='option']");
 	
 	@FindBy(xpath="//input[@placeholder='Type for hints...']")
 	private WebElement AfterselectingName;
@@ -125,8 +125,9 @@ public class DashboardPage extends BasePage {
        		   &&assignLeave_Required.isDisplayed();
       }
    
-    public void enterEmployeename(String name) {
+    public void enterEmployeename(String name) throws InterruptedException {
     	enterTextElement(VarifyEmployeeName, name);
+    	Thread.sleep(2000);
     }
     
     public boolean isEmployeeDropdownDisplayed() {
@@ -134,22 +135,63 @@ public class DashboardPage extends BasePage {
     	
     }
     
-//    public String  getSelectedEmployeeName() {
-//    	return AfterselectingName.getAttribute("value");
+    public String  getSelectedEmployeeName() {
+    	return AfterselectingName.getAttribute("value");
+    }
+    
+//    public void selectEmployeeName() {
+//
+//        // Wait until actual employee suggestions appear
+//        wait.until(driver -> {
+//            List<WebElement> options =
+//                    driver.findElements(employeeSuggestions);
+//
+//            return options.stream().anyMatch(option -> {
+//                String text = option.getText().trim();
+//
+//                return !text.isEmpty()
+//                        && !text.equalsIgnoreCase("Searching...");
+//            });
+//        });
+//
+//        // Fetch the suggestions again after waiting
+//        List<WebElement> suggestions =
+//                driver.findElements(employeeSuggestions);
+//
+//        for (WebElement suggestion : suggestions) {
+//            String name = suggestion.getText().trim();
+//
+//            if (!name.isEmpty()
+//                    && !name.equalsIgnoreCase("Searching...")) {
+//                System.out.println("Employee name: " + name);
+//            }
+//        }
 //    }
-    public void selectEmployeeName() {
-//    	String expectedName
+//    ------------------------------------------
+    public void selectEmployeeName(String expectedName) {
+//    	 wait.until(driver -> {
+//    	        List<WebElement> options =
+//    	                driver.findElements(employeeSuggestions);
+//
+//    	        return !options.isEmpty()
+//    	                && options.stream().noneMatch(option ->
+//    	                    option.getText().trim()
+//    	                        .equalsIgnoreCase("Searching..."));
+//    	    });
+//    	
+////    	
+//    	
         List<WebElement> suggestions =
                 getVisibleElements(employeeSuggestions);
-
+        System.out.println(suggestions.size());
         for (WebElement suggestion : suggestions) {
         	System.out.println("Suggestion: " + suggestion.getText());
-//            if (suggestion.getText().trim().equals(expectedName)) {
-//                click(suggestion);
-//                return;
-//            }
+            if (suggestion.getText().trim().equals(expectedName)) {
+                click(suggestion);
+                return;
+          }
         }
 
-//        throw new AssertionError("Employee not found: " + expectedName);
+        throw new AssertionError("Employee not found: " + expectedName);
     }
 }

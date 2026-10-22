@@ -43,6 +43,7 @@ public class BasePage {
     protected void enterTextElement(WebElement varifyEmployeeName, String text) {
         wait.until(ExpectedConditions.visibilityOf(varifyEmployeeName))
             .sendKeys(text);
+        
     }
 
     protected boolean isDisplayed(By locator) {
