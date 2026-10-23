@@ -12,7 +12,8 @@ Feature: Dashboard content visible
      When user navigates to Assign Leave page
      And user enters employee name "vi"
      Then employee suggestions should be displayed
-     When user selects name
+     When user selects name "Ravi M B"
+     Then selected employee name should be "Ravi M B"
    
      
      

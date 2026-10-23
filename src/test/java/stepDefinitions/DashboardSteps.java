@@ -5,12 +5,10 @@ import org.openqa.selenium.WebDriver;
 import pages.DashboardPage;
 import pages.LoginPage;
 import utilities.DriverFactory;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
 import base.BasePage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -72,7 +70,7 @@ public DashboardSteps() {
     	dashboardPage.clickAssignLeave();
     }
     @When("user enters employee name {string}")
-    public void enterEmployeename(String name) {
+    public void enterEmployeename(String name) throws InterruptedException {
     	dashboardPage.enterEmployeename(name);;
     }
     
@@ -85,18 +83,18 @@ public DashboardSteps() {
 
     }
     
-    @When("user selects name")
-    public void selectEmployeeName() {  //String expectedName
-    	dashboardPage.selectEmployeeName();;
+    @When("user selects name {string}")
+    public void selectEmployeeName(String expectedName) {  //
+    	dashboardPage.selectEmployeeName(expectedName);
     }
     
- // Then selected employee name should be "Ravi M B"
-//    @Then("selected employee name should be {string}")
-//    public void getSelectedEmployeeName(String expectedName) {
-//    	Assert.assertEquals(
-//    	        dashboardPage.getSelectedEmployeeName(),
-//    	        expectedName,
-//    	        "Selected employee name does not match"
-//    	    );
-//    }  // 
+ //
+    @Then("selected employee name should be {string}")
+    public void getSelectedEmployeeName(String expectedName) {
+    	Assert.assertEquals(
+    	        dashboardPage.getSelectedEmployeeName(),
+    	        expectedName,
+    	        "Selected employee name does not match"
+    	    );
+    }  // 
 }
