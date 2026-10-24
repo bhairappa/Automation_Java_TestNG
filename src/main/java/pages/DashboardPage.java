@@ -70,18 +70,6 @@ public class DashboardPage extends BasePage {
 //	@FindBy(xpath="//div[@class='oxd-autocomplete-text-input oxd-autocomplete-text-input--active']")
 //	private WebElement VarifyEmployeeName;
 	
-	@FindBy(xpath = "//input[@placeholder='Type for hints...']")
-	private WebElement VarifyEmployeeName;
-	
-//	@FindBy(xpath="//div[@class='oxd-autocomplete-dropdown --positon-bottom']")
-	
-//	private By employeeSuggestions =  By.xpath("//div[@class='oxd-autocomplete-dropdown --positon-bottom']");
-	
-	private By employeeSuggestions =
-	        By.xpath("//div[@role='listbox']//div[@role='option']");
-	
-	@FindBy(xpath="//input[@placeholder='Type for hints...']")
-	private WebElement AfterselectingName;
 	
     public DashboardPage(WebDriver driver) {
         super(driver);
@@ -91,6 +79,10 @@ public class DashboardPage extends BasePage {
 //    public void QuickLauchClick() {
 //    	QuickLauchclick_AssignLeave.click();
 //    }
+    
+    public void clickAssignLeave() {
+    	click(assignLeaveButton);
+    }
 //    
     public boolean isDashboardDisplayed() {
     	 wait.until(ExpectedConditions.visibilityOf(dashboardHeader));
@@ -109,9 +101,7 @@ public class DashboardPage extends BasePage {
     		   &&dashboardWidgetEmployeeDistributionbySubUnit.isDisplayed()
     		   &&dashboardWidgetEmployeeDistributionbyLocation.isDisplayed();
    }
-    public void clickAssignLeave() {
-    	click(assignLeaveButton);
-    }
+
     public boolean isAssignLeaveWidgetsDisplayed() {
       	 wait.until(ExpectedConditions.visibilityOf(assignLeave_Name));
       	System.out.println(assignLeave_Name.getText());
@@ -125,19 +115,6 @@ public class DashboardPage extends BasePage {
        		   &&assignLeave_Required.isDisplayed();
       }
    
-    public void enterEmployeename(String name) throws InterruptedException {
-    	enterTextElement(VarifyEmployeeName, name);
-    	Thread.sleep(2000);
-    }
-    
-    public boolean isEmployeeDropdownDisplayed() {
-		return isDisplayed(employeeSuggestions);
-    	
-    }
-    
-    public String  getSelectedEmployeeName() {
-    	return AfterselectingName.getAttribute("value");
-    }
     
 //    public void selectEmployeeName() {
 //
@@ -168,30 +145,5 @@ public class DashboardPage extends BasePage {
 //        }
 //    }
 //    ------------------------------------------
-    public void selectEmployeeName(String expectedName) {
-//    	 wait.until(driver -> {
-//    	        List<WebElement> options =
-//    	                driver.findElements(employeeSuggestions);
-//
-//    	        return !options.isEmpty()
-//    	                && options.stream().noneMatch(option ->
-//    	                    option.getText().trim()
-//    	                        .equalsIgnoreCase("Searching..."));
-//    	    });
-//    	
-////    	
-//    	
-        List<WebElement> suggestions =
-                getVisibleElements(employeeSuggestions);
-        System.out.println(suggestions.size());
-        for (WebElement suggestion : suggestions) {
-        	System.out.println("Suggestion: " + suggestion.getText());
-            if (suggestion.getText().trim().equals(expectedName)) {
-                click(suggestion);
-                return;
-          }
-        }
-
-        throw new AssertionError("Employee not found: " + expectedName);
-    }
+  
 }
