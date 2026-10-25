@@ -36,20 +36,28 @@ public class PIMPage extends BasePage {
 	@FindBy(xpath ="//button[text()=' Save ']")
 	private WebElement saveButton;
 	
-	public void enterEmployeeFirstname(WebElement element,String FirstName) {
-		enterTextElement(element,FirstName);
+	public void enterEmployeeFirstname(String FirstName) {
+		enterTextElement(EmployeeFirstName,FirstName);
 	}
 	
-	public void enterEmployeemiddleName(WebElement element,String middleName) {
-		enterTextElement(element,middleName);
+	public void enterEmployeemiddleName(String middleName) {
+		enterTextElement(EmployeeMiddleName,middleName);
 	}
 	
-	public void enterEmployeelastName(WebElement element,String lastName) {
-		enterTextElement(element,lastName);
+	public void enterEmployeelastName(String lastName) {
+		enterTextElement(EmployeeLastName,lastName);
 	}
 	
-	public void enterEmployeePimEmployeeId(WebElement element,String PimEmployeeId) {
-		enterTextElement(element,PimEmployeeId);
+	public void enterEmployeePimEmployeeId(String EmployeeId) {
+		enterTextElement(PimEmployeeId,EmployeeId);
+	}
+	
+	public void navigateToPimButton() {
+		click(Pimbutton);
+	}
+	
+	public void addEmployeeButton() {
+		click(AddEmployeebutton);
 	}
 	
 	public void clickOnsaveButton() {
