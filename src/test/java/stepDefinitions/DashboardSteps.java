@@ -65,36 +65,5 @@ public DashboardSteps() {
     );
    
     }
-    @When ("user navigates to Assign Leave page")
-    public void assignLeavePage() {
-    	dashboardPage.clickAssignLeave();
-    }
-    @When("user enters employee name {string}")
-    public void enterEmployeename(String name) throws InterruptedException {
-    	dashboardPage.enterEmployeename(name);;
-    }
-    
-    @Then("employee suggestions should be displayed")
-    public void EmployeenameSuggestions() {
-        Assert.assertTrue(
-                dashboardPage.isEmployeeDropdownDisplayed(),
-                "Employee suggestions are not displayed"
-            );
-
-    }
-    
-    @When("user selects name {string}")
-    public void selectEmployeeName(String expectedName) {  //
-    	dashboardPage.selectEmployeeName(expectedName);
-    }
-    
- //
-    @Then("selected employee name should be {string}")
-    public void getSelectedEmployeeName(String expectedName) {
-    	Assert.assertEquals(
-    	        dashboardPage.getSelectedEmployeeName(),
-    	        expectedName,
-    	        "Selected employee name does not match"
-    	    );
-    }  // 
+    // 
 }
