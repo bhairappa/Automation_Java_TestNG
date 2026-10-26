@@ -5,11 +5,11 @@ import java.util.Properties;
 
 public class Configreader {
 
-    private static Properties properties;
+    private static Properties properties = new Properties();
 
     static {
         try {
-            properties = new Properties();
+//            properties = new Properties();
 
             FileInputStream fis =
                     new FileInputStream("src/test/resources/config.properties");
