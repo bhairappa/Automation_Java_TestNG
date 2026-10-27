@@ -2,24 +2,43 @@ package utilities;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 
 	public class DriverFactory {
 
-	    private static WebDriver driver;
+		 private static final ThreadLocal<WebDriver> driver =
+		            new ThreadLocal<>();
+	    private static WebDriver webDriver;
 
 	    public static void initializeDriver() {
-	        driver = new ChromeDriver();
-	        driver.manage().window().maximize();
+	    	String browser =System.getProperty(
+	                "browser", Configreader.getProperty("browser"));
+	    	 Configreader.getProperty("browser");
+	    	
+	    	 if (browser.equalsIgnoreCase("chrome")) {
+	             webDriver = new ChromeDriver();
+	         } else if (browser.equalsIgnoreCase("edge")) {
+	             webDriver = new EdgeDriver();
+	         }else {
+	             throw new IllegalArgumentException(
+	                     "Unsupported browser: " + browser
+	                 );
+	             
+	             }
+	    	  driver.set(webDriver);
+	          getDriver().manage().window().maximize();
 	    }
 
 	    public static WebDriver getDriver() {
-	        return driver;
+	        return driver.get();
 	    }
 
 	    public static void quitDriver() {
-	        if (driver != null) {
-	            driver.quit();
-	            driver = null;
+	        WebDriver webDriver = driver.get();
+
+	        if (webDriver != null) {
+	            webDriver.quit();
+	            driver.remove();
 	        }
 	    }
 	}

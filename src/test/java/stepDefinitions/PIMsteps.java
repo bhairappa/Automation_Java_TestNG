@@ -34,7 +34,13 @@ public class PIMsteps {
 	 public void enterLastName(String LastName) {
 	        pimPage.enterEmployeeFirstname(LastName);
 	    }
-	  
+	 
+	 @When("user enters employee_id {string}")
+	 public void user_enters_employee_id(String EmployeeId) {
+	        pimPage.enterEmployeeFirstname(EmployeeId);
+	    }
+	 
+	 
 	 @When("user click on save button")
 	 public void  clickOnsaveButton() {
 		 pimPage.clickOnsaveButton();
