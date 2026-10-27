@@ -16,6 +16,7 @@ import org.testng.annotations.Parameters;
                 "pretty",
                 "html:target/cucumber-report.html"
         },
+        tags = "@recent",
         monochrome = true
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
