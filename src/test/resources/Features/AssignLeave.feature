@@ -1,6 +1,6 @@
   Feature: Assign Leave employee selection
   
-@recent
+
   Scenario: Verify valid employee selection
      Given user is logged in to OrangeHRM
      When user navigates to Assign Leave page
