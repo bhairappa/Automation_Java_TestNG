@@ -8,9 +8,11 @@ Feature: Add employee detail in Pim
     And user enters employee First Name "Jivan"
     And user enters employee Second Name "Martin"
     And user enters employee Last Name "b"
-    And user enters employee_id "1211"
+    And user enters employee_id "1214"
     And user click on save button
+    Then add employee success msg displayed
     And user Navigates to employeeList option
     And user searches employee "Jivan"
-    Then verify employee "Jivan Martin" and last name "b" created successfully
+    And user scroll the page
+    Then verify employee "Jivan" and employee_id "1214" created successfully
     
