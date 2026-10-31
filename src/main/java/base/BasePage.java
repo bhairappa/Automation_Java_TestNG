@@ -35,6 +35,15 @@ public class BasePage {
                    .isDisplayed();
     }
 
+    protected boolean areDisplayed(List<WebElement> elements, int expectedCount) {
+
+        List<WebElement> visibleElements = wait.until(
+            ExpectedConditions.visibilityOfAllElements(elements)
+        );
+
+        return visibleElements.size() == expectedCount;
+    }
+    
     protected void enterText(By locator, String text) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator))
             .sendKeys(text);
@@ -51,6 +60,9 @@ public class BasePage {
                 ExpectedConditions.visibilityOfElementLocated(locator)
         ).isDisplayed();
     }
+    
+    
+    
     protected List<WebElement> getVisibleElements(By locator) {
         return wait.until(
             ExpectedConditions.visibilityOfAllElementsLocatedBy(locator)
