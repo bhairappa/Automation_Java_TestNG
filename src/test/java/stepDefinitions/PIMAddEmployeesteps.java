@@ -42,12 +42,25 @@ public class PIMAddEmployeesteps {
 	 public void user_enters_employee_id(String EmployeeId) {
 	        pimPage.enterEmployeePimEmployeeId(EmployeeId);
 	    }
-	 
-	 
+	  
 	 @When("user click on save button")
 	 public void  clickOnsaveButton() {
 		 pimPage.clickOnsaveButton();
 	 }
+	 
+	 @Then("verify employeeId exist error msg")
+	 public void  verifyAddemployeeIdErrormsg() {
+		 pimPage.verifyAddemployeeIdErrormsg();
+	 }
+	 
+	 @Then("add employee success msg displayed")
+	 public void  verifyAddemployeesuccessmsg() {
+		 Assert.assertTrue(
+			        pimPage.verifyAddemployeesuccessmsg(),
+			        "Employee creation success message is not displayed"
+			    );
+	 }
+	 
 	 
 	 @When("user Navigates to employeeList option")
 	 public void  clickOnemployeeList() {
@@ -55,19 +68,32 @@ public class PIMAddEmployeesteps {
 	 }
 	
 	 @When("user searches employee {string}")  // and middle name {string}
-	 public void searchEmployee(String firstName) {  //,String middlename
+	 public void searchEmployee(String firstName) throws Exception {  //,String middlename
 		 
 	     pimPage.searchEmployee(firstName);  //middlename
 	     // Select the matching autocomplete suggestion here if shown.
+//	     Thread.sleep(2000);
 	     pimPage.clickSearchButton();
 	 }
 
-	 @Then("verify employee {string} and last name {string} created successfully")
-	 public void verifyEmployee(String firstMiddleName, String lastName) throws Exception {
+	 @When("user scroll the page")
+	 public void scrollToBottom() {
+		 pimPage.scrollToBottom();
+	 }
+	 
+	 @Then("verify employee {string} and employee_id {string} created successfully")
+	 public void verifyEmployee(String firstMiddleName, String employeeId) throws Exception {
 		 Assert.assertTrue(
-			        pimPage.isEmployeePresent(firstMiddleName, lastName),
-			        "Employee " + firstMiddleName + " " + lastName + " was not found"
+			        pimPage.isEmployeePresent(firstMiddleName, employeeId),
+			        "Employee " + firstMiddleName + " " + employeeId + " was not found"
 			    );
 	 }
 	 
+	 @Then("required error messages should be displayed")
+	 public void areRequiredErrorsDisplayed() {
+		 Assert.assertTrue(
+			        pimPage.areRequiredErrorsDisplayed(),
+			        "Required error messages are not displayed"
+			    );
+	 }
 }

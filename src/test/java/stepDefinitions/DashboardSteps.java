@@ -28,8 +28,11 @@ public class DashboardSteps{
 	
 private DashboardPage dashboardPage;
 
-public DashboardSteps() {
+private DashboardPage getDashboardSteps() {
+	if(dashboardPage==null) {
     dashboardPage = new DashboardPage(DriverFactory.getDriver());
+	}
+	return dashboardPage;
 }
     @Then("Dashboard heading should be displayed")
     public void isDashboardDisplayed() {
