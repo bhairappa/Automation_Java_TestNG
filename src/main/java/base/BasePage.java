@@ -59,6 +59,9 @@ public class BasePage {
                 ExpectedConditions.visibilityOfElementLocated(locator)
         ).isDisplayed();
     }
+    
+    
+    
     protected List<WebElement> getVisibleElements(By locator) {
         return wait.until(
             ExpectedConditions.visibilityOfAllElementsLocatedBy(locator)
