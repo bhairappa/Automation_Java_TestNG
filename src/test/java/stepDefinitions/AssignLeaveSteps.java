@@ -11,9 +11,16 @@ import utilities.DriverFactory;
 public class AssignLeaveSteps  {
 	
 	private AssignLeavePage assignLeavePage;
-	
-	public AssignLeaveSteps() {
-	    assignLeavePage = new AssignLeavePage(DriverFactory.getDriver());
+
+	private AssignLeavePage getAssignLeavePage() {
+
+	    if (assignLeavePage == null) {
+
+	        assignLeavePage =
+	            new AssignLeavePage(DriverFactory.getDriver());
+	    }
+
+	    return assignLeavePage;
 	}
 	
 	  @When ("user navigates to Assign Leave page")

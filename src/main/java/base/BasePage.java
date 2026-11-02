@@ -51,8 +51,7 @@ public class BasePage {
     
     protected void enterTextElement(WebElement varifyEmployeeName, String text) {
         wait.until(ExpectedConditions.visibilityOf(varifyEmployeeName))
-            .sendKeys(text);
-        
+            .sendKeys(text);    
     }
 
     protected boolean isDisplayed(By locator) {
@@ -66,6 +65,77 @@ public class BasePage {
     protected List<WebElement> getVisibleElements(By locator) {
         return wait.until(
             ExpectedConditions.visibilityOfAllElementsLocatedBy(locator)
+        );
+    }
+    
+ // Clear existing text
+    protected void clearText(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element)).clear();
+    }
+
+    // Get element text
+    protected String getText(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element))
+                   .getText().trim();
+    }
+
+    // Get attribute value
+    protected String getAttribute(WebElement element, String attribute) {
+        return wait.until(ExpectedConditions.visibilityOf(element))
+                   .getAttribute(attribute);
+    }
+
+    // Wait for element to disappear
+    protected boolean waitForElementToDisappear(By locator) {
+        return wait.until(
+            ExpectedConditions.invisibilityOfElementLocated(locator)
+        );
+    }
+
+    // Scroll to element
+    protected void scrollToElement(WebElement element) {
+        ((org.openqa.selenium.JavascriptExecutor) driver)
+            .executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    // Handle JavaScript alert
+    protected void acceptAlert() {
+        wait.until(ExpectedConditions.alertIsPresent()).accept();
+    }
+
+    // Dismiss JavaScript alert
+    protected void dismissAlert() {
+        wait.until(ExpectedConditions.alertIsPresent()).dismiss();
+    }
+
+    // Switch to iframe using locator
+    protected void switchToFrame(By locator) {
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(locator));
+    }
+
+    // Switch back to main page
+    protected void switchToDefaultContent() {
+        driver.switchTo().defaultContent();
+    }
+
+    // Switch to another browser window
+    protected void switchToWindow(String windowTitle) {
+        wait.until(d -> {
+            for (String handle : d.getWindowHandles()) {
+                d.switchTo().window(handle);
+
+                if (d.getTitle().equals(windowTitle)) {
+                    return true;
+                }
+            }
+            return false;
+        });
+    }
+
+    // Wait for URL
+    protected boolean waitForUrl(String expectedUrl) {
+        return wait.until(
+            ExpectedConditions.urlToBe(expectedUrl)
         );
     }
 }
