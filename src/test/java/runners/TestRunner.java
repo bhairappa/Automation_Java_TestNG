@@ -26,5 +26,6 @@ public class TestRunner extends AbstractTestNGCucumberTests {
 @Parameters("browser")
 public void setBrowser(@Optional("chrome") String browser) {
     System.setProperty("browser", browser);
+    System.out.println("Selected browser: " + browser);
 }
 }
