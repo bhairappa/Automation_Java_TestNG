@@ -36,11 +36,11 @@ private DashboardPage getDashboardSteps() {
 }
     @Then("Dashboard heading should be displayed")
     public void isDashboardDisplayed() {
-        dashboardPage = new DashboardPage(
-                DriverFactory.getDriver()
-            );
+//        dashboardPage = new DashboardPage(
+//                DriverFactory.getDriver()
+//            );
     Assert.assertTrue(
-            dashboardPage.isDashboardDisplayed(),
+    		getDashboardSteps().isDashboardDisplayed(),
             "Dashboard is not displayed after login"
     );
     }
@@ -48,12 +48,12 @@ private DashboardPage getDashboardSteps() {
     @Then("actual url should match the expected url")
     public void verifyDashboardURLAfterLogin() {
     	String expectedUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index"; 
-    	Assert.assertEquals(dashboardPage.getActualurl(),expectedUrl, "actualurl does not matches the expected url");
+    	Assert.assertEquals(getDashboardSteps().getActualurl(),expectedUrl, "actualurl does not matches the expected url");
     }
     @Then("dashboard widgets are displayed")
     public void isdashboardWidgetTimeAndWOrkDisplayed() {
     	 Assert.assertTrue(
-    	            dashboardPage.isdashboardWidgetsDisplayed(),
+    			 getDashboardSteps().isdashboardWidgetsDisplayed(),
     	            "Dashboard Widgets are not displayed after dashboard visibility"
     	    );
     }
@@ -61,9 +61,9 @@ private DashboardPage getDashboardSteps() {
     public void assignLeaveUiCheck() {
     	dashboardPage.clickAssignLeave();
     String assignLeaveUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/leave/assignLeave"; 
-    Assert.assertEquals(dashboardPage.getActualurl(),assignLeaveUrl,"actualurl does not matches the expected url");
+    Assert.assertEquals(getDashboardSteps().getActualurl(),assignLeaveUrl,"actualurl does not matches the expected url");
     Assert.assertTrue(
-            dashboardPage.isAssignLeaveWidgetsDisplayed(),
+    		getDashboardSteps().isAssignLeaveWidgetsDisplayed(),
             "Assign Leave Widgets are not displayed after dashboard visibility"
     );
    

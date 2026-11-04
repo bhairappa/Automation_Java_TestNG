@@ -13,6 +13,15 @@ import utilities.DriverFactory;
 public class LoginSteps {
 
     private LoginPage loginPage;
+    
+    private LoginPage getLoginpage() {
+    	if(loginPage==null) {
+    	loginPage = new LoginPage(DriverFactory.getDriver());
+    	}
+		return loginPage;
+    	
+    }
+    
     private DashboardPage dashboardPage;
 
     @Given("user is on the OrangeHRM login page")
@@ -29,10 +38,10 @@ public class LoginSteps {
     public void user_enters_valid_credentials() throws Exception {
 
 //    	Thread.sleep(2000);
-        loginPage.enterUsername(
+    	getLoginpage().enterUsername(
                 Configreader.getProperty("username"));
 
-        loginPage.enterPassword(
+    	getLoginpage().enterPassword(
                 Configreader.getProperty("password"));
     }
 
@@ -40,10 +49,10 @@ public class LoginSteps {
     public void user_enters_invalid_credentials() throws Exception {
 
 //    	Thread.sleep(2000);
-        loginPage.enterUsername(
+    	getLoginpage().enterUsername(
                 Configreader.getProperty("invalidusername"));
 
-        loginPage.enterPassword(
+    	getLoginpage().enterPassword(
                 Configreader.getProperty("invalidpassword"));
     }
     
@@ -54,7 +63,7 @@ public class LoginSteps {
     
     @When("user clicks on login button")
     public void user_clicks_login_button() throws Exception {
-        loginPage.clickLogin();
+    	getLoginpage().clickLogin();
     }
    
     @Then("OrangeHRM Dashboard should be displayed")
@@ -72,7 +81,7 @@ public class LoginSteps {
     @Then("user should see error msg")
     public void show_error_message() {
     	Assert.assertTrue(
-    	        loginPage.isErrorMessageDisplayed(),
+    			getLoginpage().isErrorMessageDisplayed(),
     	        "Invalid credentials error message is not displayed"
     	    );   	
     }
@@ -80,11 +89,11 @@ public class LoginSteps {
     @Then("user should see error msg as required")
     public void show_error_message_as_requored() {
     	Assert.assertTrue(
-    	        loginPage.isEmptyUserErrorMessageDisplayed(),
+    			getLoginpage().isEmptyUserErrorMessageDisplayed(),
     	        "Username required message is not displayed"
     	    );
     	Assert.assertTrue(
-    	        loginPage.isEmptypasswordErrorMessageDisplayed(),
+    			getLoginpage().isEmptypasswordErrorMessageDisplayed(),
     	        "Password required message is not displayed"
     	    );  
     	   	
@@ -98,32 +107,32 @@ public class LoginSteps {
 
         loginPage = new LoginPage(DriverFactory.getDriver());
 
-        loginPage.enterUsername(
+        getLoginpage().enterUsername(
             Configreader.getProperty("username")
         );
 
-        loginPage.enterPassword(
+        getLoginpage().enterPassword(
             Configreader.getProperty("password")
         );
 
-        loginPage.clickLogin();
+        getLoginpage().clickLogin();
     }
 
     @When("user clicks on logout dropdown")
     
     public void user_clicks_on_logout_dropdown() {
-        loginPage.clickLogoutDropdown();
+    	getLoginpage().clickLogoutDropdown();
     }
 
     @When("user clicks on logout option")
     public void user_clicks_on_logout_option() {
-        loginPage.clickLogoutOption();
+    	getLoginpage().clickLogoutOption();
     }
 
     @Then("user should see login message")
     public void user_should_see_login_page() {
         Assert.assertTrue(
-            loginPage.isLoginHeaderDisplayed(),
+        		getLoginpage().isLoginHeaderDisplayed(),
             "Login page is not displayed after logout"
         );
     }

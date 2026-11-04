@@ -25,30 +25,30 @@ public class AssignLeaveSteps  {
 	
 	  @When ("user navigates to Assign Leave page")
 	    public void assignLeavePage() {
-		  assignLeavePage.clickAssignLeave();
+		  getAssignLeavePage().clickAssignLeave();
 	    }
 	    @When("user enters employee name {string}")
 	    public void enterEmployeename(String name) throws InterruptedException {
-	    	assignLeavePage.enterEmployeename(name);
+	    	getAssignLeavePage().enterEmployeename(name);
 	    }
 	    
 	    @Then("employee suggestions should be displayed")
 	    public void EmployeenameSuggestions() {
 	        Assert.assertTrue(
-	        		assignLeavePage.isEmployeeDropdownDisplayed(),
+	        		getAssignLeavePage().isEmployeeDropdownDisplayed(),
 	                "Employee suggestions are not displayed"
 	            );
 	    }
 	    
 	    @When("user selects name {string}")
 	    public void selectEmployeeName(String expectedName) {  //
-	    	assignLeavePage.selectEmployeeName(expectedName);
+	    	getAssignLeavePage().selectEmployeeName(expectedName);
 	    } 
 	 //
 	    @Then("selected employee name should be {string}")
 	    public void getSelectedEmployeeName(String expectedName) {
 	    	Assert.assertEquals(
-	    			assignLeavePage.getSelectedEmployeeName(),
+	    			getAssignLeavePage().getSelectedEmployeeName(),
 	    	        expectedName,
 	    	        "Selected employee name does not match"
 	    	    );
@@ -56,19 +56,19 @@ public class AssignLeaveSteps  {
 	    
 	    @When("user click on assign button")
 	    public void clickAssignButton() {
-	    	assignLeavePage.clickAssignButton();
+	    	getAssignLeavePage().clickAssignButton();
 	    }
 	    
 	    @Then("user should be able to see invalid {string} error msg")
 	    public void verifyAssignErrorName(String expectedError) {
-	        Assert.assertEquals(assignLeavePage.verifyAssignErrorName(),
+	        Assert.assertEquals(getAssignLeavePage().verifyAssignErrorName(),
 	        		expectedError,
 	        		"Selected employee name error does not match");
 	    }
 	    
 	    @Then("user should be able to see Required field error message")
 	    public void verifyrequiredFieldsErrormsg() {
-	    	 Assert.assertTrue(assignLeavePage.isrequiredErrorsisDisplayed(),
+	    	 Assert.assertTrue(getAssignLeavePage().isrequiredErrorsisDisplayed(),
 		        		"One or more required field error messages are not displayed");
 	    	
 	    }

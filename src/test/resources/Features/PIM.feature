@@ -8,13 +8,13 @@ Feature: Add employee detail in Pim
     And user enters employee First Name "Jivan"
     And user enters employee Second Name "Martin"
     And user enters employee Last Name "b"
-    And user enters employee_id "1214"
+    And user enters employee_id "1225"
     And user click on save button
     Then add employee success msg displayed
     And user Navigates to employeeList option
     And user searches employee "Jivan"
     And user scroll the page
-    Then verify employee "Jivan" and employee_id "1214" created successfully
+    Then verify employee "Jivan" and employee_id "1225" created successfully
     
 @Priority2 @recent
 Scenario: Successful error msg display for repeated employee
@@ -24,7 +24,7 @@ Scenario: Successful error msg display for repeated employee
     And user enters employee First Name "Jivan"
     And user enters employee Second Name "Martin"
     And user enters employee Last Name "b"
-    And user enters employee_id "1214"
+    And user enters employee_id "1225"
     Then verify employeeId exist error msg
 
 @Priority3 @recent
