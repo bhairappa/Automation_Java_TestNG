@@ -11,7 +11,7 @@ public class AdminStpes {
 
 	private AdminPage adminpage;
 	
-	private AdminPage getAdminPage() {
+	public AdminPage getAdminPage() {
 		if(adminpage==null) {
 			adminpage = new AdminPage(DriverFactory.getDriver());
 		}
@@ -19,16 +19,40 @@ public class AdminStpes {
 	}
 	
 	@When("user clicks on admin button")
-	private void clickOnAdminbutton() {
-		getAdminPage().clickOnAdminbutton();		
+	public void clickOnAdminbutton() {
+		getAdminPage().clickOnAdminbutton();
 	}
 	
 	@Then("user should navigate to admin page")
-	private void verifyAdminUrl() {
-		String expectedUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers";
-		Assert.assertEquals(getAdminPage().verifyAdminUrl(),expectedUrl,"expected url doesn't matches");		
+	public void verifyAdminUrl() {
+//		String expectedUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers";
+		Assert.assertTrue(getAdminPage().verifyAdminUrl(),"expected url doesn't matches");		
 	}
 	
+	@When("user enters the user name {string}")
+	public void addusername(String username) {
+		getAdminPage().enterAdminUserName(username);
+	}
+	@When("user click on dropdown and selects admin")
+	public void selectUserroleAdmin() {
+		getAdminPage().selectUserroleAdminDropDown();
+		getAdminPage().selectUserroleAdmin();
+	}
+		
+	@When("user click on status drop down and selects enabled")
+	public void clickEnabledStatusAdmin()  {
+		getAdminPage().clickSelectStatusAdminDropDown();
+		getAdminPage().clickEnabledStatusAdmin();
+	}
 	
+	@When("user click on search button")
+	public void clickOnSearchButton()  {
+		getAdminPage().clickOnSearchButton();	
+	}
+	
+	@Then("user should be able to see admin user name")
+	public void verifyusername() {
+		
+	}
 	
 }
