@@ -15,15 +15,18 @@ public class AdminPage extends BasePage{
 		PageFactory.initElements(driver,this);
 	}
 	
-@FindBy(xpath = "//li[contains(@class,'oxd-main-menu')]/a[@class='oxd-main-menu-item active']")
+@FindBy(xpath = "//li[contains(@class,'oxd-main-menu')]/a[contains(@class,'oxd-main-menu-item')]")
 private WebElement adminbutton; 
-
-     public void clickOnAdminbutton() {
+ 
+public void clickOnAdminbutton() {
+    	isDisplayed(adminbutton);
         click(adminbutton);	
+        System.out.println("clicked on admin button");
      }
 
-     public String verifyAdminUrl() {  	 
-		return driver.getCurrentUrl();    	 
+     public boolean verifyAdminUrl() {  
+    	 String expectedUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers";
+    	return waitForUrl(expectedUrl);  	 
      }
      
  @FindBy(xpath = "//label[text()='Username']/ancestor::div[contains(@class,'oxd-input')]//input")
@@ -35,32 +38,41 @@ private WebElement adminbutton;
          enterTextElement(UsernameField,adminuserName);
       }
      
-@FindBy(xpath = "//div[contains(@class,'oxd-select-option')]/span[text()='Admin']")
-private WebElement selectUserrole;
+     @FindBy(xpath = "//label[normalize-space()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text--after')]")
+     private WebElement selectUserroleDropDown;
 
-       public void selectUserroleAdmin() {
-          click(selectUserrole);
+     public void selectUserroleAdminDropDown() {
+         click(selectUserroleDropDown);
      }
      
-@FindBy(xpath = "//label[normalize-space()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text--after')]")
-private WebElement selectUserroleDropDown;
+@FindBy(xpath = "//div[contains(@class,'oxd-select-option')]/span[text()='Admin']")
+private WebElement selectAdminUserrole;
 
-public void clickSelectUserroleAdmin() {
-    click(selectUserroleDropDown);
-}
-
+       public void selectUserroleAdmin() {
+          click(selectAdminUserrole);
+     }
+     
 @FindBy(xpath = "//label[text()='Status']/ancestor::div[contains(@class,'oxd-input-group')]//div[contains(@class,'oxd-select-text--after')]")
 private WebElement selectStatusDropDown;
 
-public void clickSelectStatusAdmin() {
+public void clickSelectStatusAdminDropDown() {
     click(selectStatusDropDown);
 }
  
 @FindBy(xpath = "//div[contains(@class, 'oxd-select-dropdown')]//div[contains(@class, 'oxd-select-option')][.//span[text()='Enabled']]")
-private WebElement selectStatus;
+private WebElement selectEnabledStatus;
 
 public void clickEnabledStatusAdmin() {
-    click(selectStatusDropDown);
+    click(selectEnabledStatus);
 }
+
+@FindBy(xpath = "//button[@type='submit' and normalize-space()='Search']")
+private WebElement clickOnSearchButton;
+
+public void clickOnSearchButton() {
+    click(clickOnSearchButton);
+}
+
+
 
 }

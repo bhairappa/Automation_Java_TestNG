@@ -1,6 +1,6 @@
 Feature: Add employee detail in Pim
 
-  @Priority1 @recent
+  @Priority1
   Scenario: Successful add employee details in PIM
     Given user is logged in to OrangeHRM
     When user navigates to pim field
@@ -16,7 +16,7 @@ Feature: Add employee detail in Pim
     And user scroll the page
     Then verify employee "Jivan" and employee_id "1225" created successfully
     
-@Priority2 @recent
+@Priority2
 Scenario: Successful error msg display for repeated employee
     Given user is logged in to OrangeHRM
     When user navigates to pim field
@@ -27,7 +27,7 @@ Scenario: Successful error msg display for repeated employee
     And user enters employee_id "1225"
     Then verify employeeId exist error msg
 
-@Priority3 @recent
+@Priority3
 Scenario: Successful error msg display for repeated employee
     Given user is logged in to OrangeHRM
     When user navigates to pim field
