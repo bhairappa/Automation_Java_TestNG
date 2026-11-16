@@ -73,6 +73,11 @@ public void clickOnSearchButton() {
     click(clickOnSearchButton);
 }
 
+@FindBy(xpath = "//div[@class='oxd-table-row oxd-table-row--with-border']")
+private WebElement verifyusername;
 
+public void verifyusername() {
+    click(clickOnSearchButton);
+}
 
 }
