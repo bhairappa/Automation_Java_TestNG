@@ -3,138 +3,98 @@ package stepDefinitions;
 import org.testng.Assert;
 
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
-import pages.LoginPage;
+import io.cucumber.java.en.When;
 import pages.DashboardPage;
+import pages.LoginPage;
 import utilities.Configreader;
 import utilities.DriverFactory;
 
 public class LoginSteps {
 
     private LoginPage loginPage;
-    
-    private LoginPage getLoginpage() {
-    	if(loginPage==null) {
-    	loginPage = new LoginPage(DriverFactory.getDriver());
-    	}
-		return loginPage;
-    	
-    }
-    
     private DashboardPage dashboardPage;
 
+    private LoginPage getLoginPage() {
+        if (loginPage == null) {
+            loginPage = new LoginPage(DriverFactory.getDriver());
+        }
+        return loginPage;
+    }
+
+    private DashboardPage getDashboardPage() {
+        if (dashboardPage == null) {
+            dashboardPage = new DashboardPage(DriverFactory.getDriver());
+        }
+        return dashboardPage;
+    }
+
     @Given("user is on the OrangeHRM login page")
-    public void user_is_on_login_page() {
+    public void userIsOnLoginPage() {
+        DriverFactory.getDriver().get(Configreader.getProperty("url"));
+    }
 
-        DriverFactory.getDriver()
-                .get(Configreader.getProperty("url"));
-
-        loginPage =
-                new LoginPage(DriverFactory.getDriver());
+    @Given("user is logged in to OrangeHRM")
+    public void userIsLoggedInToOrangeHRM() {
+        DriverFactory.getDriver().get(Configreader.getProperty("url"));
+        getLoginPage().login(
+            Configreader.getProperty("username"),
+            Configreader.getProperty("password")
+        );
+        Assert.assertTrue(getDashboardPage().isDashboardDisplayed(), "Dashboard did not load after login");
     }
 
     @When("user enters valid username and password")
-    public void user_enters_valid_credentials() throws Exception {
-
-//    	Thread.sleep(2000);
-    	getLoginpage().enterUsername(
-                Configreader.getProperty("username"));
-
-    	getLoginpage().enterPassword(
-                Configreader.getProperty("password"));
+    public void enterValidCredentials() {
+        getLoginPage().enterUsername(Configreader.getProperty("username"));
+        getLoginPage().enterPassword(Configreader.getProperty("password"));
     }
 
     @When("user enters invalid username and password")
-    public void user_enters_invalid_credentials() throws Exception {
-
-//    	Thread.sleep(2000);
-    	getLoginpage().enterUsername(
-                Configreader.getProperty("invalidusername"));
-
-    	getLoginpage().enterPassword(
-                Configreader.getProperty("invalidpassword"));
+    public void enterInvalidCredentials() {
+        getLoginPage().enterUsername("invalidUser");
+        getLoginPage().enterPassword("invalidPass123");
     }
-    
+
     @When("user keeps the username and password fields empty")
-    public void user_enters_empty_credentials() throws Exception {
-        //when user keeps empty fields
+    public void keepFieldsEmpty() {
+        getLoginPage().enterUsername("");
+        getLoginPage().enterPassword("");
     }
-    
+
     @When("user clicks on login button")
-    public void user_clicks_login_button() throws Exception {
-    	getLoginpage().clickLogin();
+    public void clickLoginButton() {
+        getLoginPage().clickLogin();
     }
-   
+
     @Then("OrangeHRM Dashboard should be displayed")
-    public void dashboard_should_be_displayed() {
-
-        dashboardPage =
-                new DashboardPage(DriverFactory.getDriver());
-
-        Assert.assertTrue(
-                dashboardPage.isDashboardDisplayed(),
-                "Dashboard is not displayed after login"
-        );
+    public void verifyDashboardDisplayed() {
+        Assert.assertTrue(getDashboardPage().isDashboardDisplayed(), "OrangeHRM Dashboard is not displayed");
     }
-    
+
     @Then("user should see error msg")
-    public void show_error_message() {
-    	Assert.assertTrue(
-    			getLoginpage().isErrorMessageDisplayed(),
-    	        "Invalid credentials error message is not displayed"
-    	    );   	
+    public void verifyInvalidErrorMsg() {
+        Assert.assertTrue(getLoginPage().isErrorMessageDisplayed(), "Invalid credentials error message not displayed");
     }
-    
+
     @Then("user should see error msg as required")
-    public void show_error_message_as_requored() {
-    	Assert.assertTrue(
-    			getLoginpage().isEmptyUserErrorMessageDisplayed(),
-    	        "Username required message is not displayed"
-    	    );
-    	Assert.assertTrue(
-    			getLoginpage().isEmptypasswordErrorMessageDisplayed(),
-    	        "Password required message is not displayed"
-    	    );  
-    	   	
-    }
-    @Given("user is logged in to OrangeHRM")
-    public void user_is_logged_in_to_orangehrm() throws Exception {
-
-        DriverFactory.getDriver().get(
-            Configreader.getProperty("url")
-        );
-
-        loginPage = new LoginPage(DriverFactory.getDriver());
-
-        getLoginpage().enterUsername(
-            Configreader.getProperty("username")
-        );
-
-        getLoginpage().enterPassword(
-            Configreader.getProperty("password")
-        );
-
-        getLoginpage().clickLogin();
+    public void verifyRequiredErrorMsg() {
+        Assert.assertTrue(getLoginPage().isEmptyUserErrorMessageDisplayed(), "Username required error not displayed");
+        Assert.assertTrue(getLoginPage().isEmptypasswordErrorMessageDisplayed(), "Password required error not displayed");
     }
 
     @When("user clicks on logout dropdown")
-    
-    public void user_clicks_on_logout_dropdown() {
-    	getLoginpage().clickLogoutDropdown();
+    public void clickLogoutDropdown() {
+        getLoginPage().clickLogoutDropdown();
     }
 
     @When("user clicks on logout option")
-    public void user_clicks_on_logout_option() {
-    	getLoginpage().clickLogoutOption();
+    public void clickLogoutOption() {
+        getLoginPage().clickLogoutOption();
     }
 
     @Then("user should see login message")
-    public void user_should_see_login_page() {
-        Assert.assertTrue(
-        		getLoginpage().isLoginHeaderDisplayed(),
-            "Login page is not displayed after logout"
-        );
+    public void verifyLoginHeaderDisplayed() {
+        Assert.assertTrue(getLoginPage().isLoginHeaderDisplayed(), "Login page header not displayed after logout");
     }
-    
 }

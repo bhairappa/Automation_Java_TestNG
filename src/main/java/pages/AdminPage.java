@@ -1,5 +1,9 @@
 package pages;
 
+import java.util.List;
+import java.util.Map;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,77 +11,64 @@ import org.openqa.selenium.support.PageFactory;
 
 import base.BasePage;
 
-public class AdminPage extends BasePage{
+public class AdminPage extends BasePage {
 
-	public AdminPage(WebDriver driver) {
-		super(driver);
-		// TODO Auto-generated constructor stub
-		PageFactory.initElements(driver,this);
-	}
-	
-@FindBy(xpath = "//li[contains(@class,'oxd-main-menu')]/a[contains(@class,'oxd-main-menu-item')]")
-private WebElement adminbutton; 
- 
-public void clickOnAdminbutton() {
-    	isDisplayed(adminbutton);
-        click(adminbutton);	
-        System.out.println("clicked on admin button");
-     }
+    public AdminPage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
+    }
 
-     public boolean verifyAdminUrl() {  
-    	 String expectedUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers";
-    	return waitForUrl(expectedUrl);  	 
-     }
-     
- @FindBy(xpath = "//label[text()='Username']/ancestor::div[contains(@class,'oxd-input')]//input")
- private WebElement UsernameField;
-     
-     public void enterAdminUserName(String adminuserName) {
-         click(UsernameField);
-         UsernameField.clear();
-         enterTextElement(UsernameField,adminuserName);
-      }
-     
-     @FindBy(xpath = "//label[normalize-space()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text--after')]")
-     private WebElement selectUserroleDropDown;
+    // --- Locators ---
 
-     public void selectUserroleAdminDropDown() {
-         click(selectUserroleDropDown);
-     }
-     
-@FindBy(xpath = "//div[contains(@class,'oxd-select-option')]/span[text()='Admin']")
-private WebElement selectAdminUserrole;
+    @FindBy(xpath = "//li[contains(@class,'oxd-main-menu')]/a[contains(@class,'oxd-main-menu-item')]")
+    private WebElement adminButton;
 
-       public void selectUserroleAdmin() {
-          click(selectAdminUserrole);
-     }
-     
-@FindBy(xpath = "//label[text()='Status']/ancestor::div[contains(@class,'oxd-input-group')]//div[contains(@class,'oxd-select-text--after')]")
-private WebElement selectStatusDropDown;
+    @FindBy(xpath = "//label[text()='Username']/ancestor::div[contains(@class,'oxd-input')]//input")
+    private WebElement usernameField;
 
-public void clickSelectStatusAdminDropDown() {
-    click(selectStatusDropDown);
-}
- 
-@FindBy(xpath = "//div[contains(@class, 'oxd-select-dropdown')]//div[contains(@class, 'oxd-select-option')][.//span[text()='Enabled']]")
-private WebElement selectEnabledStatus;
+    @FindBy(xpath = "//label[normalize-space()='User Role']/ancestor::div[contains(@class,'oxd-input-group')]//div[contains(@class,'oxd-select-text--after')]")
+    private WebElement userRoleDropDown;
 
-public void clickEnabledStatusAdmin() {
-    click(selectEnabledStatus);
-}
+    @FindBy(xpath = "//label[text()='Status']/ancestor::div[contains(@class,'oxd-input-group')]//div[contains(@class,'oxd-select-text--after')]")
+    private WebElement statusDropDown;
 
-@FindBy(xpath = "//button[@type='submit' and normalize-space()='Search']")
-private WebElement clickOnSearchButton;
+    @FindBy(xpath = "//button[@type='submit' and normalize-space()='Search']")
+    private WebElement searchButton;
 
-public void clickOnSearchButton() {
-    click(clickOnSearchButton);
-}
+    // Table locators specific to Admin System Users table
+    private final By tableHeaders = By.cssSelector(".oxd-table-header .oxd-table-header-cell");
+    private final By tableRows = By.cssSelector(".oxd-table-body .oxd-table-row");
+    private final By tableCells = By.cssSelector(".oxd-table-cell");
 
-@FindBy(xpath = "//div[@class='oxd-table-row oxd-table-row--with-border']")
-private WebElement verifyusername;
+    // --- Page Actions ---
 
-public void verifyusername() {
-    click(clickOnSearchButton);
-}
+    public void clickOnAdminbutton() {
+        isDisplayed(adminButton);
+        click(adminButton);
+    }
 
+    public boolean verifyAdminUrl() {
+        return waitForUrlContains("/admin/viewSystemUsers");
+    }
+
+    public void enterAdminUserName(String adminUserName) {
+        click(usernameField);
+        enterText(usernameField, adminUserName);
+    }
+
+    public void selectUserRole(String role) {
+        selectOxdDropdownByText(userRoleDropDown, role);
+    }
+
+    public void selectStatus(String status) {
+        selectOxdDropdownByText(statusDropDown, status);
+    }
+
+    public void clickOnSearchButton() {
+        click(searchButton);
+    }
+
+    public List<Map<String, String>> getSearchResultRows() {
+        return getTableData(tableHeaders, tableRows, tableCells);
+    }
 }

@@ -1,72 +1,40 @@
 package stepDefinitions;
 
-import org.openqa.selenium.WebDriver;
-
-import pages.DashboardPage;
-import pages.LoginPage;
-import utilities.DriverFactory;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import base.BasePage;
+
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import pages.DashboardPage;
+import utilities.DriverFactory;
 
-public class DashboardSteps{
+public class DashboardSteps {
 
-//public DashboardSteps(WebDriver driver) {
-//		super(driver);
-//		// TODO Auto-generated constructor stub
-//	}
-//    @FindBy(xpath = "//h6[text()='Dashboard']")
-//    private WebElement dashboardHeader;
-	
-//  public boolean isDashboardDisplayed() {
-//  return dashboardHeader.isDisplayed();
-//}
-	
-private DashboardPage dashboardPage;
+    private DashboardPage dashboardPage;
 
-private DashboardPage getDashboardSteps() {
-	if(dashboardPage==null) {
-    dashboardPage = new DashboardPage(DriverFactory.getDriver());
-	}
-	return dashboardPage;
-}
+    private DashboardPage getDashboardPage() {
+        if (dashboardPage == null) {
+            dashboardPage = new DashboardPage(DriverFactory.getDriver());
+        }
+        return dashboardPage;
+    }
+
     @Then("Dashboard heading should be displayed")
-    public void isDashboardDisplayed() {
-//        dashboardPage = new DashboardPage(
-//                DriverFactory.getDriver()
-//            );
-    Assert.assertTrue(
-    		getDashboardSteps().isDashboardDisplayed(),
-            "Dashboard is not displayed after login"
-    );
+    public void verifyDashboardHeading() {
+        Assert.assertTrue(getDashboardPage().isDashboardDisplayed(), "Dashboard heading is not displayed");
     }
-    
+
     @Then("actual url should match the expected url")
-    public void verifyDashboardURLAfterLogin() {
-    	String expectedUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index"; 
-    	Assert.assertEquals(getDashboardSteps().getActualurl(),expectedUrl, "actualurl does not matches the expected url");
+    public void verifyDashboardUrl() {
+        Assert.assertTrue(getDashboardPage().verifyDashboardUrl(), "Dashboard URL did not match expected path");
     }
+
     @Then("dashboard widgets are displayed")
-    public void isdashboardWidgetTimeAndWOrkDisplayed() {
-    	 Assert.assertTrue(
-    			 getDashboardSteps().isdashboardWidgetsDisplayed(),
-    	            "Dashboard Widgets are not displayed after dashboard visibility"
-    	    );
+    public void verifyDashboardWidgets() {
+        Assert.assertTrue(getDashboardPage().isdashboardWidgetsDisplayed(), "One or more Dashboard widgets are missing");
     }
+
     @Then("actual names should match the expected names in assign leave")
-    public void assignLeaveUiCheck() {
-    	dashboardPage.clickAssignLeave();
-    String assignLeaveUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/leave/assignLeave"; 
-    Assert.assertEquals(getDashboardSteps().getActualurl(),assignLeaveUrl,"actualurl does not matches the expected url");
-    Assert.assertTrue(
-    		getDashboardSteps().isAssignLeaveWidgetsDisplayed(),
-            "Assign Leave Widgets are not displayed after dashboard visibility"
-    );
-   
+    public void verifyAssignLeaveLabels() {
+        getDashboardPage().clickAssignLeave();
+        Assert.assertTrue(getDashboardPage().isAssignLeaveWidgetsDisplayed(), "Assign Leave labels did not match");
     }
-    // 
 }
