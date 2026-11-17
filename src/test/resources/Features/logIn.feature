@@ -1,5 +1,3 @@
-
-
 Feature: OrangeHRM Login
 
   Scenario: Successful login with valid credentials

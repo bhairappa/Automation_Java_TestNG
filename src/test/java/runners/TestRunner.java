@@ -3,6 +3,7 @@ package runners;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
@@ -17,7 +18,7 @@ import org.testng.annotations.Parameters;
                 "pretty",
                 "html:target/cucumber-report.html"
         },
-        tags = "@recent",
+//        tags = "@recent",
         monochrome = true
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
@@ -28,4 +29,10 @@ public void setBrowser(@Optional("chrome") String browser) {
     System.setProperty("browser", browser);
     System.out.println("Selected browser: " + browser);
 }
+//Add inside TestRunner.java
+//@Override
+//@DataProvider(parallel = true)
+//public Object[][] scenarios() {
+// return super.scenarios();
+//}
 }
