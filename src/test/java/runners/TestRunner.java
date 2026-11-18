@@ -2,6 +2,8 @@ package runners;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
+import utilities.DriverFactory;
+
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
@@ -26,7 +28,8 @@ public class TestRunner extends AbstractTestNGCucumberTests {
 @BeforeClass(alwaysRun = true)
 @Parameters("browser")
 public void setBrowser(@Optional("chrome") String browser) {
-    System.setProperty("browser", browser);
+//    System.setProperty("browser", browser);
+    DriverFactory.setBrowser(browser);
     System.out.println("Selected browser: " + browser);
 }
 //Add inside TestRunner.java
