@@ -131,7 +131,18 @@ public class PIMAddEmployeePage extends BasePage {
         waitForElementToDisappear(formLoader);
         click(saveButton);
     }
-
+//-------- can also be used fot  areRequiredErrorsDisplayed method -----------
+//    private final By firstNameRequiredError = By.xpath(
+//    	    "//input[@name='firstName']/ancestor::div[contains(@class,'oxd-input-group')]//span[normalize-space()='Required']"
+//    	);
+//    	private final By lastNameRequiredError = By.xpath(
+//    	    "//input[@name='lastName']/ancestor::div[contains(@class,'oxd-input-group')]//span[normalize-space()='Required']"
+//    	);
+//
+//    	public boolean areRequiredErrorsDisplayed() {
+//    	    return isDisplayed(firstNameRequiredError) && isDisplayed(lastNameRequiredError);
+//    	}
+    
     public boolean areRequiredErrorsDisplayed() {
         List<WebElement> errors = getVisibleElements(requiredErrorLocator);
         return errors.size() == 2;
